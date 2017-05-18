@@ -17,12 +17,15 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import static com.myself.wypqwer.zhengqi_zhilian.R.id.ZhuCe_NameText;
+
 public class MainActivity extends AppCompatActivity {
 
     private  EditText ED_Username;
     private  EditText ED_Paqssword;
     private MyProgressDialog ProgressDialog;
-
+    private TextView dengLu_miMaText;
+    private TextView dengLu_zhangHaoText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +38,13 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
 
         ED_Username = (EditText)findViewById(R.id.username);
+
+        ED_Username.setOnFocusChangeListener(new ED_FocusChangeListener());
         ED_Paqssword = (EditText)findViewById(R.id.password);
+        ED_Paqssword.setOnFocusChangeListener(new ED_FocusChangeListener());
+
+        dengLu_miMaText = (TextView) findViewById(R.id.dengLu_miMaText);
+        dengLu_zhangHaoText = (TextView) findViewById(R.id.dengLu_zhangHaoText);
         //登录
         ImageView login = (ImageView)findViewById(R.id.login);
         login.setOnClickListener(new MainActivityListener());
@@ -43,6 +52,29 @@ public class MainActivity extends AppCompatActivity {
         TextView zhuCe = (TextView) findViewById(R.id.zhuCe);
         zhuCe.setOnClickListener(new MainActivityListener());
 
+    }
+    private class ED_FocusChangeListener implements View.OnFocusChangeListener {
+
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            switch (v.getId()) {
+                case R.id.username:
+                    if (hasFocus) {
+                        dengLu_zhangHaoText.setBackgroundResource(R.color.royalblue);
+                    } else {
+                        dengLu_zhangHaoText.setBackgroundResource(R.color.tj11);
+                    }
+                    break;
+                case R.id.password:
+
+                    if (hasFocus) {
+                        dengLu_miMaText.setBackgroundResource(R.color.royalblue);
+                    } else {
+                        dengLu_miMaText.setBackgroundResource(R.color.tj11);
+                    }
+                    break;
+            }
+        }
     }
     private class MainActivityListener implements View.OnClickListener{
 
@@ -86,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 String soapAction = "http://tempuri.org/Get_Login";
                 // 指定WebService的命名空间和调用的方法名
                 SoapObject rpc = new SoapObject(nameSpace, methodName);
+
                 rpc.addProperty("loginName",ED_Username.getText().toString());
                 rpc.addProperty("loginPwd",ED_Paqssword.getText().toString());
 
@@ -157,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(MainActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
                 }
             }
         }

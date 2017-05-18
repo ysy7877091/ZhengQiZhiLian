@@ -4,26 +4,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:clipToPadding="true"
-    android:fitsSystemWindows="true"
-    >
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/tj9"
-        >
+        android:background="@color/royalblue">
+
         <ImageView
+            android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/icon_back"
             android:layout_marginLeft="15dp"
-            android:layout_centerVertical="true"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:id="@+id/Zhuce_Back"
             android:layout_centerVertical="true"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,6 +33,7 @@
         android:layout_height="60dp"
         >
         <EditText
+            android:textCursorDrawable="@drawable/my_cursor"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@null"
@@ -72,6 +69,7 @@
         android:layout_height="60dp"
         >
         <EditText
+            android:textCursorDrawable="@drawable/my_cursor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
@@ -105,17 +103,18 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         >
-        <EditText
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:id="@+id/ZhuCe_sex"
-            android:textColorHint="@color/tj11"
-            android:hint="请选择性别"
+            android:text="请选择性别"
             android:paddingLeft="100dp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/tj11"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -140,6 +139,7 @@
         android:layout_height="wrap_content"
         >
         <EditText
+            android:textCursorDrawable="@drawable/my_cursor"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@null"
@@ -175,6 +175,7 @@
         android:layout_height="wrap_content"
         >
         <EditText
+            android:textCursorDrawable="@drawable/my_cursor"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@null"
@@ -186,6 +187,7 @@
             android:paddingLeft="100dp"
             android:password="true"
             android:textColor="@color/black"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -206,11 +208,16 @@
             />
     </RelativeLayout>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/login"
-        android:id="@+id/registerSubmit"
+    <TextView
+        android:layout_marginTop="30dp"
+        android:id="@+id/register_Submit"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:background="@color/royalblue"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"/>
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="注册"/>
+
 </LinearLayout>

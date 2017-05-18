@@ -1,14 +1,16 @@
 package com.myself.wypqwer.zhengqi_zhilian;
 
-import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.ksoap2.SoapEnvelope;
@@ -17,34 +19,123 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import static com.myself.wypqwer.zhengqi_zhilian.R.id.ZhuCe_Name;
-import static com.myself.wypqwer.zhengqi_zhilian.R.id.ZhuCe_PassWord;
-import static com.myself.wypqwer.zhengqi_zhilian.R.id.ZhuCe_SurePassWord;
-import static com.myself.wypqwer.zhengqi_zhilian.R.id.ZhuCe_TelePhoneNum;
+import static com.myself.wypqwer.zhengqi_zhilian.R.id.ZhuCe_NameText;
+import static com.myself.wypqwer.zhengqi_zhilian.R.id.ZhuCe_PassWordText;
+import static com.myself.wypqwer.zhengqi_zhilian.R.id.ZhuCe_TelePhoneNumText;
 import static com.myself.wypqwer.zhengqi_zhilian.R.id.ZhuCe_sex;
 
-//测试用
 public class ZhuCe extends AppCompatActivity implements View.OnClickListener{
+
     private  EditText ZhuCe_Name;
     private  EditText ZhuCe_TelePhoneNum;
-    private  EditText ZhuCe_sex;
     private  EditText ZhuCe_PassWord;
     private  EditText ZhuCe_SurePassWord;
-    private ImageView registerSubmit;
+    private  TextView registerSubmit;
+    private  MyProgressDialog ProgressDialog;
+    private  ImageView iv_back;
+    private TextView zhuCe_nameText;
+    private TextView zhuCe_telePhoneNumText;
+    private TextView zhuCe_sexText;
+    private TextView zhuCe_passWordText;
+    private TextView ZhuCe_SurePassWordText;
+    private TextView zhuCe_sex;
+    private String sex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zhu_ce);
+        CommonMethod.setStatuColor(ZhuCe.this,R.color.royalblue);
+
+        iv_back = (ImageView) findViewById(R.id.iv_back);
+        iv_back.setOnClickListener(this);
 
         ZhuCe_Name = (EditText)findViewById(R.id.ZhuCe_Name);
         ZhuCe_TelePhoneNum = (EditText)findViewById(R.id.ZhuCe_TelePhoneNum);
-        ZhuCe_sex = (EditText)findViewById(R.id.ZhuCe_sex);
+        //ZhuCe_sex = (EditText)findViewById(R.id.ZhuCe_sex);
+        zhuCe_sex = (TextView) findViewById(ZhuCe_sex);
+        zhuCe_sex.setOnClickListener(this);
+
         ZhuCe_PassWord = (EditText)findViewById(R.id.ZhuCe_PassWord);
         ZhuCe_SurePassWord = (EditText)findViewById(R.id.ZhuCe_SurePassWord);
-        registerSubmit = (ImageView) findViewById(R.id.registerSubmit);
+
+        zhuCe_nameText = (TextView) findViewById(ZhuCe_NameText);
+        zhuCe_telePhoneNumText = (TextView) findViewById(ZhuCe_TelePhoneNumText);
+        zhuCe_sexText = (TextView) findViewById(R.id.ZhuCe_sexText);
+        zhuCe_passWordText = (TextView) findViewById(ZhuCe_PassWordText);
+        ZhuCe_SurePassWordText = (TextView) findViewById(R.id.ZhuCe_SurePassWordText);
+
+        ZhuCe_Name.setOnFocusChangeListener(new ZhuCe_FocusChangeListener());
+        ZhuCe_TelePhoneNum.setOnFocusChangeListener(new ZhuCe_FocusChangeListener());
+        zhuCe_sex.setOnFocusChangeListener(new ZhuCe_FocusChangeListener());
+        ZhuCe_PassWord.setOnFocusChangeListener(new ZhuCe_FocusChangeListener());
+        ZhuCe_SurePassWord.setOnFocusChangeListener(new ZhuCe_FocusChangeListener());
+
+        registerSubmit = (TextView) findViewById(R.id.register_Submit);
         registerSubmit.setOnClickListener(this);
 
+    }
+    private class ZhuCe_FocusChangeListener implements View.OnFocusChangeListener {
+
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            switch (v.getId()) {
+                case R.id.ZhuCe_Name:
+                    if (hasFocus) {
+                        zhuCe_nameText.setBackgroundResource(R.color.royalblue);
+                    } else {
+                        zhuCe_nameText.setBackgroundResource(R.color.tj11);
+                    }
+                    break;
+                case R.id.ZhuCe_TelePhoneNum:
+                    if (hasFocus) {
+                        zhuCe_telePhoneNumText.setBackgroundResource(R.color.royalblue);
+                    } else {
+                        zhuCe_telePhoneNumText.setBackgroundResource(R.color.tj11);
+                    }
+                    break;
+                case ZhuCe_sex:
+                    if (hasFocus) {
+                        zhuCe_sexText.setBackgroundResource(R.color.royalblue);
+                    } else {
+                        zhuCe_sexText.setBackgroundResource(R.color.tj11);
+                    }
+                    break;
+                case R.id.ZhuCe_PassWord:
+                    if (hasFocus) {
+                        zhuCe_passWordText.setBackgroundResource(R.color.royalblue);
+                    } else {
+                        zhuCe_passWordText.setBackgroundResource(R.color.tj11);
+                    }
+                    break;
+                case R.id.ZhuCe_SurePassWord:
+                    if (hasFocus) {
+                        ZhuCe_SurePassWordText.setBackgroundResource(R.color.royalblue);
+                    } else {
+                        ZhuCe_SurePassWordText.setBackgroundResource(R.color.tj11);
+                    }
+                    break;
+            }
+        }
+    }
+    private boolean YanZheng() {
+        if (ZhuCe_Name.getText().toString().equals("") || ZhuCe_Name.getText().toString() == null) {
+            Toast.makeText(ZhuCe.this, "用户名不能为空", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (ZhuCe_TelePhoneNum.getText().toString().equals("") || ZhuCe_TelePhoneNum.getText().toString() == null) {
+            Toast.makeText(ZhuCe.this, "电话号码不能为空", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (ZhuCe_PassWord.getText().toString().equals("") || ZhuCe_PassWord.getText().toString() == null) {
+            Toast.makeText(ZhuCe.this, "密码不能为空", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!ZhuCe_PassWord.getText().toString().equals(ZhuCe_SurePassWord.getText().toString())) {
+            Toast.makeText(ZhuCe.this, "两次输入密码不一致", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     Runnable networkZhuce = new Runnable() {
@@ -65,7 +156,8 @@ public class ZhuCe extends AppCompatActivity implements View.OnClickListener{
                 rpc.addProperty("loginName",ZhuCe_Name.getText().toString());
                 rpc.addProperty("loginPwd",ZhuCe_PassWord.getText().toString());
                 rpc.addProperty("NAME",ZhuCe_SurePassWord.getText().toString());
-                rpc.addProperty("SEX",ZhuCe_sex.getText().toString());
+                rpc.addProperty("SEX",zhuCe_sex.getText().toString());
+                Log.e("warn",zhuCe_sex.getText().toString());
                 rpc.addProperty("PhoneNum",ZhuCe_TelePhoneNum.getText().toString());
 
                 // 生成调用WebService方法的SOAP请求信息,并指定SOAP的版本
@@ -96,19 +188,42 @@ public class ZhuCe extends AppCompatActivity implements View.OnClickListener{
             }
         }
     };
-
+    String arr []=null;
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.registerSubmit:
+
+            case R.id.iv_back:
+                finish();
+                break;
+            case ZhuCe_sex:
+
+                arr = new String[]{"男", "女"};
+                new AlertDialog.Builder(ZhuCe.this).setTitle("请选择")
+                        .setSingleChoiceItems(arr, 0,
+                                new DialogInterface.OnClickListener() {
+
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        sex = arr[which];
+                                        zhuCe_sex.setText(arr[which]);
+                                        zhuCe_sex.setTextColor(getResources().getColor(R.color.black));
+                                        dialog.dismiss();
+                                    }
+                                }
+                        ).setNegativeButton("取消", null).show();
+                break;
+            case R.id.register_Submit:
+
+                boolean isFull = YanZheng();
+                if (!isFull == true) {
+                    return;
+                }
+                ProgressDialog = new MyProgressDialog(ZhuCe.this, false, "注册中...");
                 new Thread(networkZhuce).start();
-
-
 
                 break;
         }
     }
-
 
     Handler handlerInsert_LoginUser = new Handler() {
         @Override
@@ -118,13 +233,13 @@ public class ZhuCe extends AppCompatActivity implements View.OnClickListener{
             int i = msg.what;
             if(i==0){
 
-                //ProgressDialog.dismiss();
+                ProgressDialog.dismiss();
                 Toast.makeText(ZhuCe.this, "网络或服务器异常", Toast.LENGTH_SHORT).show();
 
             }else if (i == 1) {
                 String str = (String) msg.obj;
                 Log.e("warn", str);
-
+                ProgressDialog.dismiss();
                 if (str.contains("State")) {
                     int index = str.indexOf("State");
                     Log.e("warn", String.valueOf(index));
@@ -148,13 +263,6 @@ public class ZhuCe extends AppCompatActivity implements View.OnClickListener{
                     Toast.makeText(ZhuCe.this, "注册失败", Toast.LENGTH_SHORT).show();
                 }
             }
-
-
-
-
-
-
-
         }
     };
 }
