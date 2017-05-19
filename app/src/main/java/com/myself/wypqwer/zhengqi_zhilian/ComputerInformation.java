@@ -38,7 +38,6 @@ public class ComputerInformation extends AppCompatActivity implements PublicOneL
         Button computer_More = (Button)findViewById(R.id.computer_More);
         computer_More.setOnClickListener(new ComputerInformationListener());
 
-
         ProgressDialog = new MyProgressDialog(this,false,"加载中...");
         new ComputerInformationRunnable(id,name).getShopsData(this);
     }

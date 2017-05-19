@@ -221,8 +221,6 @@ public class ShouYeMapActivity extends AppCompatActivity{
             String url = Path.get_MapUrl().concat("/0");
             // 查询所需的参数类
             Query query = new Query();
-
-
             query.setReturnGeometry(true);
             query.setOutFields(new String[] {"*"});
             //String whereClause = queryParams[1];
@@ -246,7 +244,6 @@ public class ShouYeMapActivity extends AppCompatActivity{
                 msg.obj = fs;
                 msg.setData(bundle);
                 handler.sendMessage(msg);
-
             }
             Message msg = Message.obtain();
             Bundle bundle = new Bundle();
