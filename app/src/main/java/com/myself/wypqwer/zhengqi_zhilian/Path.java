@@ -10,6 +10,7 @@ public class Path {
     private static String faGai_Url="http://beidoujieshou.sytxmap.com:6500/FGWebServer.asmx";
     private static String _MapUrl = "http://ysmapservices.sytxmap.com/arcgis/rest/services/New/FaGai_Wai/MapServer";
 
+
     public static String get_faGai_Url() {
 
         return faGai_Url;
