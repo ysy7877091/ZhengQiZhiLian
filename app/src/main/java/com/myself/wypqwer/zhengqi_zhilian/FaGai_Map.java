@@ -8,7 +8,7 @@ public class FaGai_Map extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fa_gai__map);
+        setContentView(R.layout.wenti_huizong_layout);
 
 
 

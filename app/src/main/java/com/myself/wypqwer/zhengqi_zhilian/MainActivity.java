@@ -17,8 +17,6 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import static com.myself.wypqwer.zhengqi_zhilian.R.id.ZhuCe_NameText;
-
 public class MainActivity extends AppCompatActivity {
 
     private  EditText ED_Username;
@@ -143,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
                     msg.what = 1;
                     msg.obj = object.toString();
                     handlerLogin.sendMessage(msg);
-
             } catch (Exception e) {
                 Message msg = Message.obtain();
                 msg.what = 0;
@@ -183,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("warn", result1);
                     if (result1.equals("0")) {
                         Toast.makeText(MainActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this, FaGai_Map.class);
+                        Intent intent = new Intent(MainActivity.this, ShouYeMapActivity.class);
                         startActivity(intent);
                         finish();
                     } else if (result1.equals("2")) {

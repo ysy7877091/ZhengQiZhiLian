@@ -34,29 +34,31 @@ import java.util.Map;
  * Created by Administrator on 2017/5/18.
  */
 
-public class ShouYeMapActivity extends AppCompatActivity{
+public class ShouYeMapActivity extends AppCompatActivity {
     private MapView mMapView;
     private MyProgressDialog ProgressDialog;
     private ArcGISDynamicMapServiceLayer layer;
     private ArcGISLayerInfo layerInforZJ = null;
     private MyProgressDialog progressDialog;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shouyemap_layout);
-        CommonMethod.setStatuColor(ShouYeMapActivity.this,R.color.white);
+        CommonMethod.setStatuColor(ShouYeMapActivity.this, R.color.white);
         init();
     }
-    private void init(){
-        Button MapMeau = (Button)findViewById(R.id.MapMeau);
-        MapMeau.setOnClickListener(new ShouYeMapActivityListener());
-        mMapView = (MapView)findViewById(R.id.mapView);
 
-        Envelope ell = new Envelope(41502640.8973194, 4614039.69784388,41531975.8104773,4632772.5692145);//这里有4个坐标点，看似是一个矩形的4个顶点。
-        Envelope el = new Envelope(41489475.648039+3000,4629936.377077+15000,41527078.378675+7000,4595382.516492);//这里有4个坐标点，看似是一个矩形的4个顶点。
+    private void init() {
+        Button MapMeau = (Button) findViewById(R.id.MapMeau);
+        MapMeau.setOnClickListener(new ShouYeMapActivityListener());
+        mMapView = (MapView) findViewById(R.id.mapView);
+
+        Envelope ell = new Envelope(41502640.8973194, 4614039.69784388, 41531975.8104773, 4632772.5692145);//这里有4个坐标点，看似是一个矩形的4个顶点。
+        Envelope el = new Envelope(41489475.648039 + 3000, 4629936.377077 + 15000, 41527078.378675 + 7000, 4595382.516492);//这里有4个坐标点，看似是一个矩形的4个顶点。
         mMapView.setExtent(ell);
 
-        ProgressDialog = new MyProgressDialog(ShouYeMapActivity.this,false,"");
+        ProgressDialog = new MyProgressDialog(ShouYeMapActivity.this, false, "");
 
         layer = new ArcGISDynamicMapServiceLayer(Path.get_MapUrl());
         layer.refresh();//刷新地图
@@ -65,6 +67,7 @@ public class ShouYeMapActivity extends AppCompatActivity{
         mMapView.setOnStatusChangedListener(new mMapViewChangListener());
         new Thread(getlayer).start();
     }
+
     private class mMapViewChangListener implements OnStatusChangedListener {//OnStatusChangedListener接口用于监听MapView或Layer（图层）状态变化的监听器
 
         @Override
@@ -76,70 +79,52 @@ public class ShouYeMapActivity extends AppCompatActivity{
 
                         layerInforZJ = layer.getLayers()[0];
                         layerInforZJ.getName();
-                        Log.e("warn",layerInforZJ.getLayers().length+"");
-                        /* List<String> list1=null;
-                        for(int i=0;i<list.size();i++){
-                           Legend l= list.get(i);
-                                   list1=l.getValues();
-
-                        }
-                        for(int j=0;j<list1.size();j++){
-                            Log.e("warn","list1:"+list1.get(j));
-                        }*/
-
-
-                        Log.e("warn","图层总长度"+layer.getLayers().length);
+                        Log.e("warn", layerInforZJ.getLayers().length + "");
+                        Log.e("warn", "图层总长度" + layer.getLayers().length);
                         for (int i = 0; i < layer.getLayers().length; i++) {
                             ArcGISLayerInfo layerInfor = layer.getLayers()[i];
-                            if(layerInfor.getName().equals("泵站")){
+                            if (layerInfor.getName().equals("泵站")) {
                                 layerInfor.setVisible(false);
-                            }else if(layerInfor.getName().equals("企业红线")){
+                            } else if (layerInfor.getName().equals("企业红线")) {
                                 layerInfor.setVisible(false);
-                            }else if(layerInfor.getName().equals("规划道路红线")){
+                            } else if (layerInfor.getName().equals("规划道路红线")) {
                                 layerInfor.setVisible(false);
-                            }else if(layerInfor.getName().equals("分区")){
+                            } else if (layerInfor.getName().equals("分区")) {
                                 layerInfor.setVisible(false);
-                            }else if(layerInfor.getName().equals("标注重点项目企业")){
+                            } else if (layerInfor.getName().equals("标注重点项目企业")) {
                                 layerInfor.setVisible(false);
-                            }else{
+                            } else {
                                 layerInfor.setVisible(true);
                             }
                             Log.e("GISActivity地图服务加载", "图层名称：" + layerInfor.getName() + "");
                         }
                     }
                 }
-                //rlLoadView.setVisibility(View.INVISIBLE);
                 cancelProgressDialog();
-                //gifLoadGis.showCover();
-                //Toast.makeText(GISActivity.this, "地图加载成功", Toast.LENGTH_SHORT).show();
             } else if (status == STATUS.INITIALIZATION_FAILED) {
                 Toast.makeText(getApplicationContext(), "地图加载失败", Toast.LENGTH_SHORT).show();
-                /*rlLoadView.setVisibility(View.INVISIBLE);
-                gifLoadGis.showCover();*/
                 cancelProgressDialog();
             } else if (status == STATUS.LAYER_LOADING_FAILED) {
                 Toast.makeText(getApplicationContext(), "图层加载失败", Toast.LENGTH_SHORT).show();
-                /*rlLoadView.setVisibility(View.INVISIBLE);
-                gifLoadGis.showCover();*/
                 cancelProgressDialog();
             }
         }
     }
+
     Point point;
     OnSingleTapListener mOnSingleTapListener = new OnSingleTapListener() {
         @Override
         public void onSingleTap(float x, float y) {
 
-               progressDialog = new MyProgressDialog(ShouYeMapActivity.this, false,"");
-                point = mMapView.toMapPoint(x, y);
-                /*AsyncQueryTask ayncQuery = new AsyncQueryTask();
-                ayncQuery.execute(x, y);*/
-            AsyncQueryTask(x,y);
+            progressDialog = new MyProgressDialog(ShouYeMapActivity.this, false, "");
+            point = mMapView.toMapPoint(x, y);
+
+            AsyncQueryTask(x, y);
         }
     };
 
-   //点击地图 获取相应的区域
-    private void AsyncQueryTask(float x, float y){
+    //点击地图 获取相应的区域
+    private void AsyncQueryTask(float x, float y) {
         GraphicsLayer layer = GetGraphicLayer();
         if (layer != null && layer.isInitialized() && layer.isVisible()) {
             Graphic result = null;
@@ -150,23 +135,24 @@ public class ShouYeMapActivity extends AppCompatActivity{
                 // 显示提示
 
                 String name = getValue(result, "XMMC", "");//点击时获取的点击区域名称 RefName获取名称参数 DocPath获取参数
-                String id = getValue(result,"XH", "");//点击时获取的点击区域名称 RefName获取名称参数 DocPath获取参数
+                String id = getValue(result, "XH", "");//点击时获取的点击区域名称 RefName获取名称参数 DocPath获取参数
                 cancelprogressDialog();
-                if(!id.equals("")&&!name.equals("")){
-                    Intent intent = new Intent(ShouYeMapActivity.this,ComputerInformation.class);
-                    intent.putExtra("id",id);
-                    intent.putExtra("name",name);
+                if (!id.equals("") && !name.equals("")) {
+                    Intent intent = new Intent(ShouYeMapActivity.this, ComputerInformation.class);
+                    intent.putExtra("id", id);
+                    intent.putExtra("name", name);
                     startActivity(intent);
-                }else{
+                } else {
                     Toast.makeText(this, "查询结果为空", Toast.LENGTH_SHORT).show();
                 }
-            }else{
+            } else {
                 cancelprogressDialog();
             }
-        }else{
+        } else {
             cancelprogressDialog();
         }
     }
+
     /*
     * 从一个图层里里 查找获得 Graphics对象. x,y是屏幕坐标,layer
     * 是GraphicsLayer目标图层（要查找的）。相差的距离是50像素。
@@ -196,6 +182,7 @@ public class ShouYeMapActivity extends AppCompatActivity{
         }
         return result;
     }
+
     String getValue(Graphic graphic, String key, String defaultVal) {
         Object obj = graphic.getAttributeValue(key);
 
@@ -204,12 +191,14 @@ public class ShouYeMapActivity extends AppCompatActivity{
         else
             return obj.toString();
     }
-    private class ShouYeMapActivityListener implements View.OnClickListener{
+
+    private class ShouYeMapActivityListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.MapMeau:break;
+            switch (v.getId()) {
+                case R.id.MapMeau:
+                    break;
             }
         }
     }
@@ -222,19 +211,11 @@ public class ShouYeMapActivity extends AppCompatActivity{
             // 查询所需的参数类
             Query query = new Query();
             query.setReturnGeometry(true);
-            query.setOutFields(new String[] {"*"});
-            //String whereClause = queryParams[1];
-               /* SpatialReference sr = SpatialReference.create(2365);// 建立一个空间参考
-                // WKID_WGS84_WEB_MERCATOR_AUXILIARY_SPHERE（102100）
-                query.setGeometry(new Envelope(41502640.8973194, 4614039.69784388,
-                        41531975.8104773, 4632772.5692145));// 设置查询空间范围
-                query.setOutSpatialReference(sr);// 设置查询输出的坐标系*/
+            query.setOutFields(new String[]{"*"});
             query.setReturnGeometry(true);// 是否返回空间信息
             query.setWhere("1=1");// where条件
-
             com.esri.core.tasks.ags.query.QueryTask qTask = new com.esri.core.tasks.ags.query.QueryTask(url);// 查询任务类
             FeatureSet fs = null;
-            Log.i(null, "doInBackground is running !");
             try {
                 fs = qTask.execute(query);// 执行查询，返回查询结果
             } catch (Exception e) {
@@ -260,38 +241,37 @@ public class ShouYeMapActivity extends AppCompatActivity{
             if (fs != null) {
                 Graphic[] grs = fs.getGraphics();
                 Log.e("warn", grs.length + "adsds");
-                for(int i=0;i<grs.length;i++){
+                for (int i = 0; i < grs.length; i++) {
                     AddNewGraphic(grs[i]);
                 }
-
-            }else{
+            } else {
                 Toast.makeText(ShouYeMapActivity.this, "获取企业图层失败", Toast.LENGTH_SHORT).show();
             }
         }
     };
+
     //添加企业覆盖物
     private void AddNewGraphic(Graphic grs) {
-        Log.e("warn",grs.getAttributes().toString());
+        Log.e("warn", grs.getAttributes().toString());
         GraphicsLayer graphicsLayer = GetGraphicLayer();//创建新图层对象
 
-        if (graphicsLayer  != null &&graphicsLayer .isInitialized() && graphicsLayer .isVisible()) {
+        if (graphicsLayer != null && graphicsLayer.isInitialized() && graphicsLayer.isVisible()) {
             // 转换坐标
             //Point pt = mMapView.toMapPoint(new Point(x, y));
-
             // 附加特别的属性
             //Map<String, Object> map = new HashMap<String, Object>();
             //map.put("tag", "" + (char) (m_Char++));
             // 创建 graphic对象
-            CreateGraphic(graphicsLayer,grs);
+            CreateGraphic(graphicsLayer, grs);
             // 添加 Graphics 到图层
         }
     }
-    private void CreateGraphic(GraphicsLayer graphicsLayer,Graphic grs) {
+
+    private void CreateGraphic(GraphicsLayer graphicsLayer, Graphic grs) {
 
         Drawable image;
 
-            image = getBaseContext()
-                    .getResources().getDrawable(R.mipmap.mapcomputerdian);
+        image = getBaseContext().getResources().getDrawable(R.mipmap.mapcomputerdian);
 
         PictureMarkerSymbol symbol = new PictureMarkerSymbol(image);
         // 构建graphic
@@ -299,23 +279,28 @@ public class ShouYeMapActivity extends AppCompatActivity{
         graphicsLayer.setRenderer(new SimpleRenderer(symbol));
         graphicsLayer.addGraphic(grs);//生成图层
     }
-    private GraphicsLayer mGraphicsLayer= new GraphicsLayer();;//覆盖物
+
+    private GraphicsLayer mGraphicsLayer = new GraphicsLayer();
+    //覆盖物
+
     private GraphicsLayer GetGraphicLayer() {
 
         mMapView.addLayer(mGraphicsLayer);
 
         return mGraphicsLayer;
     }
-    private void cancelProgressDialog(){
-        if(ProgressDialog!=null){
+
+    private void cancelProgressDialog() {
+        if (ProgressDialog != null) {
             ProgressDialog.dismiss();
-            ProgressDialog=null;
+            ProgressDialog = null;
         }
     }
-    private void cancelprogressDialog(){
-        if(progressDialog!=null){
+
+    private void cancelprogressDialog() {
+        if (progressDialog != null) {
             progressDialog.dismiss();
-            progressDialog=null;
+            progressDialog = null;
         }
     }
 }
