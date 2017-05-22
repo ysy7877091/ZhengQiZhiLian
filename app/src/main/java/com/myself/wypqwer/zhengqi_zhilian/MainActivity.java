@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("warn", result1);
                     if (result1.equals("0")) {
                         Toast.makeText(MainActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this, ShouYeMapActivity.class);
+                        Intent intent = new Intent(MainActivity.this, FaGai_Map.class);
                         startActivity(intent);
                         finish();
                     } else if (result1.equals("2")) {
