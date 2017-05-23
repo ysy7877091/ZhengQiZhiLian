@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <TextView
+
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/tv_wenTiListItem_qiYeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="企业名称" />
+
+    <TextView
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/tv_wenTiListItem_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="姓名" />
+
+    <TextView
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:layout_alignParentRight="true"
+        android:id="@+id/tv_wenTiListItem_isChuLi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="是否处理" />
+
+
+    <TextView
+        android:textSize="16sp"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/tv_wenTiListItem_Time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2017-11-11" />
+
+
+</RelativeLayout>

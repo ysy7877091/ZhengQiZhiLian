@@ -164,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"无数据",Toast.LENGTH_SHORT).show();
 
             } else if (i == 1) {
+                ProgressDialog.dismiss();
                 String str = (String) msg.obj;
                 Log.e("warn", str);
 

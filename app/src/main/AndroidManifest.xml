@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo"
@@ -20,9 +21,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".FaGai_Map" />
-        <activity android:name=".ZhuCe"></activity>
-        <activity android:name=".ShouYeMapActivity"></activity>
-        <activity android:name=".ComputerInformation"></activity>
+        <activity android:name=".ZhuCe" />
+        <activity android:name=".ShouYeMapActivity" />
+        <activity android:name=".ComputerInformation" />
+        <activity android:name=".WenTi_List" />
+        <activity android:name=".XiuGai_MiMa" />
+        <activity android:name=".WenTi_XiangQing"></activity>
     </application>
 
 </manifest>

@@ -5,12 +5,10 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@mipmap/maptop">
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -18,7 +16,7 @@
             android:layout_centerInParent="true"
             android:text="问题详情"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="23sp"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -27,6 +25,11 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:id="@+id/XiangQing_back"/>
 
     </RelativeLayout>
 
@@ -125,6 +128,7 @@
             android:layout_marginLeft="10dp"
             android:hint="提报类型"/>
         <ImageView
+            android:id="@+id/XiangQing_sanJiao"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
@@ -172,14 +176,14 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textColor="@color/black"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         android:text="提报问题"
         />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:background="@drawable/edittext_biankuang"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"

@@ -128,6 +128,10 @@ public class ZhuCe extends AppCompatActivity implements View.OnClickListener{
             Toast.makeText(ZhuCe.this, "电话号码不能为空", Toast.LENGTH_SHORT).show();
             return false;
         }
+        if (ZhuCe_sex.getText().toString().equals("") || ZhuCe_sex.getText().toString() == null) {
+            Toast.makeText(ZhuCe.this, "性别不能为空", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if (ZhuCe_PassWord.getText().toString().equals("") || ZhuCe_PassWord.getText().toString() == null) {
             Toast.makeText(ZhuCe.this, "密码不能为空", Toast.LENGTH_SHORT).show();
             return false;
@@ -136,11 +140,8 @@ public class ZhuCe extends AppCompatActivity implements View.OnClickListener{
             Toast.makeText(ZhuCe.this, "两次输入密码不一致", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (ZhuCe_sex.getText().toString().equals("") || ZhuCe_sex.getText().toString() == null) {
-            Toast.makeText(ZhuCe.this, "性别不能为空", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (!ZhuCe_sex.getText().toString().equals("男") ||!ZhuCe_sex.getText().toString().equals("女") ) {
+
+        if (!ZhuCe_sex.getText().toString().equals("女")&& !ZhuCe_sex.getText().toString().equals("男")) {
             Toast.makeText(ZhuCe.this, "请输入正确性别", Toast.LENGTH_SHORT).show();
             return false;
         }

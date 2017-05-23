@@ -27,6 +27,11 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:id="@+id/XiuGai_back"/>
 
     </RelativeLayout>
 
@@ -95,11 +100,11 @@
     </RelativeLayout>
 
 
-<ImageView
-    android:id="@+id/iv_queren"
-    android:layout_marginTop="50dp"
-    android:layout_gravity="center"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@mipmap/queren_xiugai"/>
+    <ImageView
+        android:id="@+id/iv_queren"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/queren_xiugai"/>
 </LinearLayout>
