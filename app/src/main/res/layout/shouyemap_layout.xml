@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@mipmap/maptop"
         android:scaleType="fitXY"
+        android:id="@+id/top_rl"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -43,7 +44,34 @@
             android:layout_height="fill_parent"
             android:background="#ffff00">
         </com.esri.android.map.MapView>
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入搜索内容"
+                android:textSize="18sp"
+                android:paddingTop="15dp"
+                android:id="@+id/Map_SouSuo"
+                android:paddingLeft="10dp"
+                android:paddingBottom="15dp"
+                android:background="@color/white"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/mapsousuo"
+                android:clickable="false"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"/>
+        </RelativeLayout>
     </RelativeLayout>
 
 </LinearLayout>

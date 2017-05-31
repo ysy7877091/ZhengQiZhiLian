@@ -35,11 +35,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="问题"
+            android:id="@+id/problem"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:textSize="18sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:visibility="gone"
+            />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

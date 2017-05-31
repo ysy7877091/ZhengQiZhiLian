@@ -1,16 +1,27 @@
 package com.myself.wypqwer.zhengqi_zhilian;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.MarshalBase64;
 import org.ksoap2.serialization.SoapObject;
@@ -49,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
         //注册
         TextView zhuCe = (TextView) findViewById(R.id.zhuCe);
         zhuCe.setOnClickListener(new MainActivityListener());
-
+        chechVersion1();
+        UserN();
     }
     private class ED_FocusChangeListener implements View.OnFocusChangeListener {
 
@@ -180,8 +192,14 @@ public class MainActivity extends AppCompatActivity {
                     String result1 = result.substring(index1 + 1, index2);
                     Log.e("warn", result1);
                     if (result1.equals("0")) {
+                        SharedPreferences sp = getSharedPreferences("logininformation",0);
+                        SharedPreferences.Editor edit=sp.edit();
+                        edit.putString("use",ED_Username.getText().toString().trim());
+                        edit.putString("pwd",ED_Paqssword.getText().toString().trim());
+                        edit.commit();
                         Toast.makeText(MainActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this, FaGai_Map.class);
+                        Intent intent = new Intent(MainActivity.this, ShouYeMapActivity.class);
+                        intent.putExtra("alais",ED_Username.getText().toString().trim());
                         startActivity(intent);
                         finish();
                     } else if (result1.equals("2")) {
@@ -193,4 +211,53 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+    //读写sd卡权限
+    private static String[] PERMISSIONS_STORAGE = {
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE ,
+            Manifest.permission.READ_PHONE_STATE};
+
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    //检查sd卡和读取手机emei申请权限
+    private void chechVersion1(){
+        if(Build.VERSION.SDK_INT>=23){
+            //检查手机是否有该权限
+            int checkCallPhonePermission = ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if(checkCallPhonePermission!= PackageManager.PERMISSION_GRANTED){//当没有该权限时
+                //弹出对话框申请该权限   数组里装的是要申请的权限 id = 0 索引0 申请权限在数组中的位置 返回的数组结果也在数组索引0中
+                ActivityCompat.requestPermissions(MainActivity.this, PERMISSIONS_STORAGE,REQUEST_EXTERNAL_STORAGE);
+                return;
+            }
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //返回的数组 结果的位置就是申请该权限 申请的权限位置 即索引0
+        if(grantResults[0]==PackageManager.PERMISSION_GRANTED){//已授权
+            Toast.makeText(getApplicationContext(),"授权成功", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(getApplicationContext(),"权限被拒绝,有可能导致应用内部错误", Toast.LENGTH_SHORT).show();
+        }
+        //sd卡权限
+        if(grantResults[REQUEST_EXTERNAL_STORAGE]==PackageManager.PERMISSION_GRANTED){//已授权
+            Toast.makeText(getApplicationContext(),"授权成功", Toast.LENGTH_SHORT).show();
+
+        }else{
+            Toast.makeText(getApplicationContext(),"权限被拒绝,有可能导致应用内部错误", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    //获取已保存的用户名
+    private void UserN(){
+        SharedPreferences sp =getSharedPreferences("logininformation",0);
+        String user=sp.getString("use","0");
+        String pwd=sp.getString("pwd","0");
+        if(!user.equals("0")&&!pwd.equals("0")){
+            ED_Username.setText(user);
+            ED_Paqssword.setText(pwd);
+        }
+    }
+
+
 }

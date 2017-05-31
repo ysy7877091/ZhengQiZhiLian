@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="全部状态"
+        android:padding="10dp"
+        android:id="@+id/ProblemSum_allState"
+        android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="未处理"
+        android:id="@+id/ProblemSum_NoComplete"
+        android:padding="10dp"
+        android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="已处理"
+        android:id="@+id/ProblemSum_Complete"
+        android:padding="10dp"
+        android:textColor="@color/black"/>
+
+</LinearLayout>

@@ -6,13 +6,32 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <permission
+        android:name="com.myself.wypqwer.zhengqi_zhilian.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.myself.wypqwer.zhengqi_zhilian.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+
+
+
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name=".ExampleApplication">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,12 +40,105 @@
             </intent-filter>
         </activity>
         <activity android:name=".FaGai_Map" />
-        <activity android:name=".ZhuCe" />
-        <activity android:name=".ShouYeMapActivity" />
-        <activity android:name=".ComputerInformation" />
-        <activity android:name=".WenTi_List" />
-        <activity android:name=".XiuGai_MiMa" />
-        <activity android:name=".WenTi_XiangQing"></activity>
+        <activity android:name=".ZhuCe"></activity>
+        <activity android:name=".ShouYeMapActivity"></activity>
+        <activity android:name=".ComputerInformation"></activity>
+        <activity android:name=".MapSouSuoActivity"></activity>
+        <activity android:name=".ProblemSumActivity"></activity>
+        <activity android:name=".ProblemInformation"></activity>
+        <activity android:name=".MainXiuGaiPWD"></activity>
+        <!--<activity android:name="Company.CompanyComblem"></activity>
+        <activity android:name="Company.CompanyComblemInformation"></activity>
+        <activity android:name="Company.ProblemInformation"></activity>
+        <activity android:name="Manager.Manager_ZhuYeMapActivity"></activity>
+        <activity android:name="Manager.Manager_ProblemSum"></activity>
+        <activity android:name="Manager.XiuGaiPwd"></activity>-->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="cn.jpush.android.service.DaemonService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter >
+                <action android:name="cn.jpush.android.intent.DaemonService" />
+                <category android:name="com.myself.wypqwer.zhengqi_zhilian"/>
+            </intent-filter>
+        </service>
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true" >
+            <intent-filter android:priority="1000">
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+                <category android:name="com.myself.wypqwer.zhengqi_zhilian"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+       </receiver>
+         <activity
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.myself.wypqwer.zhengqi_zhilian" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="cn.jpush.android.ui.PopWinActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="false"
+            android:theme="@style/MyDialogStyle">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.myself.wypqwer.zhengqi_zhilian" />
+            </intent-filter>
+        </activity>
+        <service
+             android:name="cn.jpush.android.service.DownloadService"
+             android:enabled="true"
+             android:exported="false" >
+         </service>
+         <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
+
+      <receiver
+            android:name=".ProblemService$ProblemReceiver"
+            android:enabled="true">
+            <intent-filter>
+
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+                <category android:name="com.myself.wypqwer.zhengqi_zhilian" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
+        <meta-data android:name="JPUSH_APPKEY" android:value="45a387ede2ebd18a445ea5f1"/>
+
+
     </application>
 
 </manifest>

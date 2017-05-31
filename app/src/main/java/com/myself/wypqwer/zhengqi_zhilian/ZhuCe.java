@@ -5,9 +5,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +36,7 @@ public class ZhuCe extends AppCompatActivity implements View.OnClickListener{
     private  EditText ZhuCe_SurePassWord;
     private  TextView registerSubmit;
     private  MyProgressDialog ProgressDialog;
-    private  ImageView iv_back;
+    private  Button iv_back;
     private TextView zhuCe_nameText;
     private TextView zhuCe_telePhoneNumText;
     private TextView zhuCe_sexText;
@@ -39,14 +45,17 @@ public class ZhuCe extends AppCompatActivity implements View.OnClickListener{
     private TextView zhuCe_sex;
     private String sex;
     private ImageView registerSubmit1;
-
+    private EditText ZhuCe_Power;
+    private TextView ZhuCe_ZhuCe_Power_sexText;
+    private EditText ZhuCe_Power_Type;
+    private TextView ZhuCe_ZhuCe_Power_Type_sexText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zhu_ce);
         CommonMethod.setStatuColor(ZhuCe.this,R.color.white);
 
-        iv_back = (ImageView) findViewById(R.id.iv_back);
+        iv_back = (Button) findViewById(R.id.iv_back);
         iv_back.setOnClickListener(this);
 
         ZhuCe_Name = (EditText)findViewById(R.id.ZhuCe_Name);
@@ -57,14 +66,19 @@ public class ZhuCe extends AppCompatActivity implements View.OnClickListener{
 
         ZhuCe_PassWord = (EditText)findViewById(R.id.ZhuCe_PassWord);
         ZhuCe_SurePassWord = (EditText)findViewById(R.id.ZhuCe_SurePassWord);
-
+        ZhuCe_Power = (EditText)findViewById(R.id.ZhuCe_Power);
         zhuCe_nameText = (TextView) findViewById(ZhuCe_NameText);
         zhuCe_telePhoneNumText = (TextView) findViewById(ZhuCe_TelePhoneNumText);
         zhuCe_sexText = (TextView) findViewById(R.id.ZhuCe_sexText);
         zhuCe_passWordText = (TextView) findViewById(ZhuCe_PassWordText);
         ZhuCe_SurePassWordText = (TextView) findViewById(R.id.ZhuCe_SurePassWordText);
+        ZhuCe_ZhuCe_Power_sexText = (TextView)findViewById(R.id.ZhuCe_ZhuCe_Power_sexText);
+        ZhuCe_Power_Type = (EditText)findViewById(R.id.ZhuCe_Power_Type);
+        ZhuCe_ZhuCe_Power_Type_sexText=(TextView)findViewById(R.id.ZhuCe_ZhuCe_Power_Type_sexText);
 
+        ZhuCe_Power_Type.setOnFocusChangeListener(new ZhuCe_FocusChangeListener());
         ZhuCe_Name.setOnFocusChangeListener(new ZhuCe_FocusChangeListener());
+        ZhuCe_Power.setOnFocusChangeListener(new ZhuCe_FocusChangeListener());
         ZhuCe_TelePhoneNum.setOnFocusChangeListener(new ZhuCe_FocusChangeListener());
         ZhuCe_sex.setOnFocusChangeListener(new ZhuCe_FocusChangeListener());
         ZhuCe_PassWord.setOnFocusChangeListener(new ZhuCe_FocusChangeListener());
@@ -115,7 +129,80 @@ public class ZhuCe extends AppCompatActivity implements View.OnClickListener{
                         ZhuCe_SurePassWordText.setBackgroundResource(R.color.tj11);
                     }
                     break;
+                case R.id.ZhuCe_Power:
+                    if (hasFocus) {
+                        ZhuCe_ZhuCe_Power_sexText.setBackgroundResource(R.color.royalblue);
+
+                    } else {
+                        ZhuCe_ZhuCe_Power_sexText.setBackgroundResource(R.color.tj11);
+                    }
+                    break;
+                case R.id.ZhuCe_Power_Type:
+                                            if (hasFocus) {
+                                                ZhuCe_ZhuCe_Power_Type_sexText.setBackgroundResource(R.color.royalblue);
+                                            } else {
+                                                ZhuCe_ZhuCe_Power_Type_sexText.setBackgroundResource(R.color.tj11);
+                                            }
+                                            break;
             }
+        }
+    }
+    private PopupWindow popupwindow;
+    WindowManager.LayoutParams lp;
+    private void BD_TimepopWindow() {
+        lp = getWindow().getAttributes();
+        lp.alpha =0.5f; //0.0-1.0
+        getWindow().setAttributes(lp);
+
+        View addview = LayoutInflater.from(this).inflate(R.layout.zhucepop_layout, null);
+
+        TextView ProblemSum_leader= (TextView) addview.findViewById(R.id.ProblemSum_leader);
+        ProblemSum_leader.setOnClickListener(new ProblemSumActivityListener());
+
+        TextView ProblemSum_Manager= (TextView) addview.findViewById(R.id.ProblemSum_Manager);
+        ProblemSum_Manager.setOnClickListener(new ProblemSumActivityListener());
+
+        TextView ProblemSum_Company= (TextView) addview.findViewById(R.id.ProblemSum_Company);
+        ProblemSum_Company.setOnClickListener(new ProblemSumActivityListener());
+
+        //BD_addinit(addview);
+        popupwindow = new PopupWindow(addview, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);//2,3参数为宽高
+        popupwindow.setTouchable(true);//popupWindow可触摸
+        popupwindow.setOutsideTouchable(true);//点击popupWindow以外区域消失
+        popupwindow.setFocusable(true);
+        popupwindow.setTouchInterceptor(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                // TODO Auto-generated method stub
+                Log.i("mengdd", "onTouch : ");
+                return false;
+            }
+        });
+        //设置popwindow消失的监听事件
+        popupwindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                lp.alpha =1; //0.0-1.0
+                getWindow().setAttributes(lp);
+            }
+        });
+        popupwindow.setBackgroundDrawable(getResources().getDrawable(R.color.white));
+        //popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        // 设置好参数之后再show
+        //popupwindow.showAsDropDown(AllState,0, 10);//在view(top)控件正下方，以view为参照点第二个参数为popwindow距离view的横向距离，
+        //第三个参数为y轴即popwindow距离view的纵向距离
+    }
+    private void cancelpopupwindow(){
+        if(popupwindow!=null){
+            popupwindow.dismiss();
+        }
+    }
+    private class ProblemSumActivityListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+
         }
     }
 
@@ -156,11 +243,11 @@ public class ZhuCe extends AppCompatActivity implements View.OnClickListener{
                 // 命名空间
                 String nameSpace = "http://tempuri.org/";
                 // 调用的方法名称
-                String methodName = "Insert_LoginUser";
+                String methodName = "Add_LoginUser";
                 // EndPoint
                 String endPoint = Path.get_faGai_Url();
                 // SOAP Action
-                String soapAction = "http://tempuri.org/Insert_LoginUser";
+                String soapAction = "http://tempuri.org/Add_LoginUser";
                 // 指定WebService的命名空间和调用的方法名
                 SoapObject rpc = new SoapObject(nameSpace, methodName);
                 rpc.addProperty("loginName",ZhuCe_Name.getText().toString());

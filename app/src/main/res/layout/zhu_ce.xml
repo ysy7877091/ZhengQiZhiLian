@@ -7,26 +7,28 @@
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
     android:background="@color/white"
-    android:weightSum="7">
+    android:weightSum="13">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
        android:orientation="vertical"
         android:layout_weight="1">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
 
             <ImageView
-                android:id="@+id/iv_back"
-               android:paddingLeft="20dp"
-                android:paddingTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/icon_back"/>
-
+                android:src="@mipmap/icon_back"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:id="@+id/iv_back"
+                android:layout_centerVertical="true"/>
             <TextView
                 android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
@@ -35,20 +37,12 @@
                 android:textColor="#040404"
                 android:textSize="23sp"
                 />
-        </RelativeLayout>
-
-        <ImageView
-            android:paddingTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/titles"/>
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -59,11 +53,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -73,13 +62,13 @@
             <EditText
                 android:textCursorDrawable="@drawable/my_cursor"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="10dp"
                 android:background="@null"
                 android:textColorHint="#cbcbd1"
                 android:id="@+id/ZhuCe_Name"
-                android:hint="请输入账号"
+                android:hint="请输入姓名"
                 android:layout_centerVertical="true"/>
 
             <TextView
@@ -103,7 +92,7 @@
                 android:inputType="number"
                 android:textCursorDrawable="@drawable/my_cursor"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="10dp"
                 android:background="@null"
@@ -127,38 +116,10 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1">
-
             <EditText
                 android:textCursorDrawable="@drawable/my_cursor"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="10dp"
-                android:background="@null"
-                android:textColorHint="#cbcbd1"
-                android:id="@+id/ZhuCe_sex"
-                android:hint="请输入性别"
-                android:layout_centerVertical="true"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/tj11"
-                android:id="@+id/ZhuCe_sexText"
-                android:layout_below="@id/ZhuCe_sex"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
-                />
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1">
-            <EditText
-                android:textCursorDrawable="@drawable/my_cursor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="10dp"
                 android:background="@null"
@@ -187,7 +148,7 @@
             <EditText
                 android:textCursorDrawable="@drawable/my_cursor"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="10dp"
                 android:background="@null"
@@ -208,7 +169,92 @@
                 />
 
         </RelativeLayout>
-    </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1">
+
+            <EditText
+                android:textCursorDrawable="@drawable/my_cursor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="10dp"
+                android:background="@null"
+                android:textColorHint="#cbcbd1"
+                android:id="@+id/ZhuCe_sex"
+                android:hint="请输入性别"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/tj11"
+                android:id="@+id/ZhuCe_sexText"
+                android:layout_below="@id/ZhuCe_sex"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1">
+
+            <EditText
+                android:textCursorDrawable="@drawable/my_cursor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="10dp"
+                android:background="@null"
+                android:textColorHint="#cbcbd1"
+                android:id="@+id/ZhuCe_Power"
+                android:hint="请输入权限"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/tj11"
+                android:id="@+id/ZhuCe_ZhuCe_Power_sexText"
+                android:layout_below="@id/ZhuCe_Power"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:visibility="gone">
+
+            <EditText
+                android:textCursorDrawable="@drawable/my_cursor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="10dp"
+                android:background="@null"
+                android:textColorHint="#cbcbd1"
+                android:id="@+id/ZhuCe_Power_Type"
+                android:hint=""
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/tj11"
+                android:id="@+id/ZhuCe_ZhuCe_Power_Type_sexText"
+                android:layout_below="@id/ZhuCe_Power_Type"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                />
+
+        </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
