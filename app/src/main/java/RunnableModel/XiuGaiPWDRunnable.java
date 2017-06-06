@@ -10,6 +10,8 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import JavaBeen.PublicBeen;
+
 /**
  * Created by Administrator on 2017/5/23.
  */
@@ -17,8 +19,12 @@ import org.ksoap2.transport.HttpTransportSE;
 public class XiuGaiPWDRunnable implements PublicOneListMehtodInterface {
     private String pwd;
     PublicOneListInterface getData;
-    public XiuGaiPWDRunnable( String pwd){
+    private String user;
+    private String oldPwd;
+    public XiuGaiPWDRunnable( String pwd,String user,String oldPwd){
         this.pwd=pwd;
+        this.user=user;
+        this.oldPwd=oldPwd;
     }
     @Override
     public void getShopsData(PublicOneListInterface getDataListener) {
@@ -31,17 +37,21 @@ public class XiuGaiPWDRunnable implements PublicOneListMehtodInterface {
                     // 命名空间
                     String nameSpace = "http://tempuri.org/";
                     // 调用的方法名称
-                    String methodName = "Check_ProjectBrief";
+                    String methodName = "Update_Password";
                     // EndPoint
                     String endPoint = Path.get_faGai_Url();
                     // SOAP Action
-                    String soapAction = "http://tempuri.org/Check_ProjectBrief";
+                    String soapAction = "http://tempuri.org/Update_Password";
                     // 指定WebService的命名空间和调用的方法名
                     SoapObject rpc = new SoapObject(nameSpace, methodName);
                     //设置需调用WebService接口需要传入的参数CarNum
-                    if(!pwd.equals("")){
-                        rpc.addProperty("ProID",pwd);
-                    }
+
+                    rpc.addProperty("loginName",user);
+                    rpc.addProperty("OldPwd",oldPwd);
+                    rpc.addProperty("NewPwd",pwd);
+                    Log.e("warn",user);
+                    Log.e("warn",oldPwd);
+                    Log.e("warn",pwd);
                     // 生成调用WebService方法的SOAP请求信息,并指定SOAP的版本
                     SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER10);
                     envelope.dotNet = true;
@@ -69,7 +79,15 @@ public class XiuGaiPWDRunnable implements PublicOneListMehtodInterface {
 
                     }
                     if(object!=null) {
-                        getData.onGetDataSuccess(object.toString());
+
+                        SoapObject soapProvince = (SoapObject)envelope.bodyIn;
+
+                        SoapObject soap1 = (SoapObject) soapProvince.getProperty("Update_PasswordResult");//获取整个数据
+                        Log.e("warn",soapProvince.getProperty("Update_PasswordResult").toString());
+
+                        Log.e("warn",soap1.getProperty("State").toString());
+
+                        getData.onGetDataSuccess(soap1.getProperty("State").toString());
                     }else{
                         getData.onEmptyData("修改密码失败");
                     }

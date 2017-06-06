@@ -28,7 +28,7 @@ public class ClearEditText extends EditText implements OnFocusChangeListener,
 
 	public ClearEditText(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		//init();//撤销输入内容
+		init();//撤销输入内容
 	}
 
 	private void init() {

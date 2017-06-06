@@ -45,13 +45,13 @@ public class MapSouSuoActivity extends AppCompatActivity {
 
 
 
-        Button SouSuoButton = (Button)findViewById(R.id.SouSuoButton);
+        /*Button SouSuoButton = (Button)findViewById(R.id.SouSuoButton);
         SouSuoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
-        });
+        });*/
         CompanyMethod();
     }
     String arr []=null;

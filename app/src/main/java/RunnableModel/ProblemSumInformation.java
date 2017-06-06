@@ -1,28 +1,20 @@
 package RunnableModel;
 
-import android.os.Message;
-import android.util.Log;
-
-import com.myself.wypqwer.zhengqi_zhilian.Path;
-
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
-
 /**
  * Created by Administrator on 2017/5/22.
  */
 
-public class ProblemSumInformation implements PublicOneListMehtodInterface{
-    private PublicOneListInterface DataListener;
+public class ProblemSumInformation implements PublicMethodInterface{
+    private PublicInterface DataListener;
+
+
     @Override
-    public void getShopsData(PublicOneListInterface getDataListener) {
+    public void getShopsData(PublicInterface getDataListener) {
         this.DataListener = getDataListener;
-                new Thread(){
-                    @Override
-                    public void run() {
-                        super.run();
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
 
                         /*try{
                             Log.e("warn","30");
@@ -91,7 +83,7 @@ public class ProblemSumInformation implements PublicOneListMehtodInterface{
                         }*/
 
 
-                    }
-                }.start();
+            }
+        }.start();
     }
 }

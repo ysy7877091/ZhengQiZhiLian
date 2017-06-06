@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:id="@+id/top_rl"
+        android:background="@color/z070"
 
         >
         <ImageView
@@ -26,14 +27,14 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="修改密码"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18sp"/>
     </RelativeLayout>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:background="@drawable/edittext_biankuang"
         android:id="@+id/ED_Username"
         android:hint="输入新密码"
@@ -45,8 +46,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/edittext_biankuang"
         android:id="@+id/ED_Paqssword"

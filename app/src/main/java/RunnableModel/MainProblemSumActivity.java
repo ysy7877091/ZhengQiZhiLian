@@ -1,14 +1,5 @@
 package RunnableModel;
 
-import android.net.Network;
-import android.os.Message;
-import android.util.Log;
-
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
-
 import java.util.ArrayList;
 import java.util.List;
 

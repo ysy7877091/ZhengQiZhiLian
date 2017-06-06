@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:text="修改密码"
             android:padding="10dp"
-            android:id="@+id/MapPop_ShouYe"
+            android:id="@+id/MapPop_Pwd"
             android:textColor="@color/black"/>
     </LinearLayout>
 </LinearLayout>

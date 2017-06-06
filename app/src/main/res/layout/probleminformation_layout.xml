@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#00000000"
-            android:id="@+id/ProblemInformation_Back"/>
+            android:id="@+id/Manager_ProblemInformation_Back"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,6 +38,14 @@
             android:id="@+id/ProblemInformation_Close"
             android:text="关闭"/>
     </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -114,7 +122,7 @@
             android:layout_centerVertical="true"
             android:textSize="15sp"
             android:layout_marginLeft="10dp"
-            android:hint="责任人"/>
+            android:hint="提报人"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -168,7 +176,53 @@
         android:background="@drawable/edittext_biankuang"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:padding="10dp"
         android:id="@+id/ProblemInformation_reason"
         android:layout_marginBottom="5dp"
         android:textColor="@color/black"/>
+            <com.android.volley.toolbox.NetworkImageView
+                android:layout_marginLeft="10dp"
+                android:layout_width="250dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/Manager_tupian"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"/>
+      <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="bottom"
+                android:id="@+id/ll_regitANDagree">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bohui"
+                android:text="驳回"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:padding="10dp"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chuli"
+                android:text="立即处理"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

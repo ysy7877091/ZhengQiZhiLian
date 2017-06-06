@@ -25,5 +25,12 @@
         android:id="@+id/ProblemSum_Complete"
         android:padding="10dp"
         android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="已驳回"
+        android:id="@+id/ProblemSum_bohui"
+        android:padding="10dp"
+        android:textColor="@color/black"/>
 
 </LinearLayout>

@@ -46,10 +46,6 @@ import com.esri.core.renderer.SimpleRenderer;
 import com.esri.core.symbol.PictureMarkerSymbol;
 import com.esri.core.tasks.ags.query.Query;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -250,16 +246,17 @@ public class ShouYeMapActivity extends AppCompatActivity{
                 case R.id.MapMeau:
                                     MeauPopWindows();
                                     break;
-                case R.id.MapPop_ShouYe:
-                                            /*Intent intent2 = new Intent(ShouYeMapActivity.this,MainXiuGaiPWD.class);
-                                            startActivity(intent2);*/
-                                            Toast.makeText(ShouYeMapActivity.this, "系统维护，该功能不久将开启", Toast.LENGTH_SHORT).show();
+                case R.id.MapPop_Pwd:
+                                            Intent intent2 = new Intent(ShouYeMapActivity.this,MainXiuGaiPWD.class);
+                                            intent2.putExtra("user",getIntent().getStringExtra("alais"));
+                                            intent2.putExtra("pwd",getIntent().getStringExtra("pwd"));
+                                            startActivity(intent2);
+                                            //Toast.makeText(ShouYeMapActivity.this, "系统维护，该功能不久将开启", Toast.LENGTH_SHORT).show();
                                             closePopwindow();
                                             break;
                 case R.id.MapPop_SumProblem:
-                                                /*Intent intent1 = new Intent(ShouYeMapActivity.this,ProblemSumActivity.class);
-                                                startActivity(intent1);*/
-                                                Toast.makeText(ShouYeMapActivity.this, "系统维护，该功能不久将开启", Toast.LENGTH_SHORT).show();
+                                                Intent intent1 = new Intent(ShouYeMapActivity.this,ProblemSumActivity.class);
+                                                startActivity(intent1);
                                                 closePopwindow();
                                                 break;
                 case R.id.Map_SouSuo:
@@ -408,7 +405,7 @@ public class ShouYeMapActivity extends AppCompatActivity{
     }
 
     private void addinit(View view) {
-        TextView MapPop_ShouYe = (TextView)view.findViewById(R.id.MapPop_ShouYe);
+        TextView MapPop_ShouYe = (TextView)view.findViewById(R.id.MapPop_Pwd);
         MapPop_ShouYe.setOnClickListener(new ShouYeMapActivityListener());
         TextView MapPop_SumProblem = (TextView)view.findViewById(R.id.MapPop_SumProblem);
         MapPop_SumProblem.setOnClickListener(new ShouYeMapActivityListener());

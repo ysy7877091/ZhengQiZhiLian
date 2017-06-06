@@ -41,14 +41,14 @@
             android:singleLine="true"
            android:layout_marginRight="60dp"
             />
-        <ImageView
+       <!-- <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/mapsousuo"
             android:layout_marginRight="70dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-           />
+           />-->
         <Button
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="委托局"
+            android:text="责任人"
             android:textSize="13sp"
             android:clickable="false"
             android:id="@+id/zerenren"
@@ -99,7 +99,7 @@
                 android:text="全部状态"
                 android:textSize="13sp"
                 android:clickable="false"
-                android:id="@+id/allState"
+                android:id="@+id/Leader_allState"
                 android:layout_centerVertical="true"
                 />
             <ImageView
@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:text="全部时间"
                 android:textSize="13sp"
-                android:id="@+id/alltime"
+                android:id="@+id/Leader_alltime"
                 android:layout_centerVertical="true"
 
                 />

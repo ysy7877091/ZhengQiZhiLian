@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,14 +22,25 @@ import RunnableModel.XiuGaiPWDRunnable;
 public class MainXiuGaiPWD extends AppCompatActivity implements PublicOneListInterface{
     private EditText ED_Username;
     private  EditText ED_Paqssword;
+    private MyProgressDialog ProgressDialog;
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.xiugaipwd_layout);
+        Log.e("warn",getIntent().getStringExtra("pwd"));
         init();
     }
     private void init(){
+        if(getIntent().getStringExtra("user")==null||getIntent().getStringExtra("pwd")==null){
+            Toast.makeText(this, "未获取到有效信息", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Button ManagerPWD_Back = (Button)findViewById(R.id.ManagerPWD_Back);
+        ED_Username = (EditText)findViewById(R.id.ED_Username);
+        ED_Username.setOnFocusChangeListener(new ED_FocusChangeListener());
+        ED_Paqssword = (EditText)findViewById(R.id.ED_Paqssword);
+        ED_Paqssword.setOnFocusChangeListener(new ED_FocusChangeListener());
         ManagerPWD_Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,14 +59,11 @@ public class MainXiuGaiPWD extends AppCompatActivity implements PublicOneListInt
                             Toast.makeText(MainXiuGaiPWD.this, "密码不能为空", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        new XiuGaiPWDRunnable(ED_Username.getText().toString()).getShopsData(MainXiuGaiPWD.this);
+                        ProgressDialog = new MyProgressDialog(MainXiuGaiPWD.this,false,"");
+                        new XiuGaiPWDRunnable(ED_Username.getText().toString(),getIntent().getStringExtra("user"),getIntent().getStringExtra("pwd")).getShopsData(MainXiuGaiPWD.this);
             }
         });
 
-        ED_Username = (EditText)findViewById(R.id.ED_Username);
-        ED_Username.setOnFocusChangeListener(new ED_FocusChangeListener());
-        ED_Paqssword = (EditText)findViewById(R.id.ED_Paqssword);
-        ED_Paqssword.setOnFocusChangeListener(new ED_FocusChangeListener());
     }
 
     @Override
@@ -110,10 +119,19 @@ public class MainXiuGaiPWD extends AppCompatActivity implements PublicOneListInt
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             int i= msg.what;
+            cancelProgressDialog();
             if(i==0){
-
+                String result = (String)msg.obj;
+                if(result.equals("0")){
+                    Toast.makeText(MainXiuGaiPWD.this,"修改成功", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                else if(result.equals("2")){
+                    Toast.makeText(MainXiuGaiPWD.this,"旧密码与新密码对不上", Toast.LENGTH_SHORT).show();
+                }else if(result.equals("3")){
+                    Toast.makeText(MainXiuGaiPWD.this,"系统异常，请联系管理员", Toast.LENGTH_SHORT).show();
+                }
             }else if(i==1){
-
                 Toast.makeText(MainXiuGaiPWD.this, (String)msg.obj, Toast.LENGTH_SHORT).show();
             }else if(i==2){
                 Toast.makeText(MainXiuGaiPWD.this, (String)msg.obj, Toast.LENGTH_SHORT).show();
@@ -122,4 +140,10 @@ public class MainXiuGaiPWD extends AppCompatActivity implements PublicOneListInt
             }
         }
     };
+    private void cancelProgressDialog(){
+        if(ProgressDialog!=null){
+            ProgressDialog.dismiss();
+            ProgressDialog=null;
+        }
+    }
 }

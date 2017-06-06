@@ -4,7 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:clipToPadding="true"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,7 +67,7 @@
             android:layout_centerVertical="true"
             android:textSize="15sp"
             android:layout_marginLeft="10dp"
-            android:hint="序号"/>
+            android:hint="姓名"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,9 +76,40 @@
             android:textSize="15sp"
             android:id="@+id/ManagerProblemInformation_Order"
             android:layout_marginRight="10dp"
+            android:text=""
             />
     </RelativeLayout>
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/guanliju"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/edittext_biankuang"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
+            android:hint="管理局(负责人)"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="15sp"
+            android:id="@+id/ManagerProblemInformation_Manager"
+            android:layout_marginRight="10dp"
+            />
+    </RelativeLayout>
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -95,13 +137,14 @@
             android:id="@+id/ManagerProblemInformation_Time"
             android:layout_marginRight="10dp"
             />
-    </RelativeLayout>
-    <RelativeLayout
+    </RelativeLayout>-->
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:id="@+id/fuzeren"
         >
         <TextView
             android:layout_width="match_parent"
@@ -124,34 +167,30 @@
             android:id="@+id/ManagerProblemInformation_Person"
             android:layout_marginRight="10dp"
             />
-    </RelativeLayout>
+    </RelativeLayout>-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/black"
+                android:text="项目"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:id="@+id/xiangmu"
         >
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/edittext_biankuang"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:textSize="15sp"
-            android:layout_marginLeft="10dp"
-            android:hint="提报类型"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textSize="15sp"
             android:id="@+id/ManagerProblemInformation_Type"
-            android:layout_marginRight="10dp"
+            android:padding="10dp"
             />
     </RelativeLayout>
     <TextView
@@ -162,31 +201,43 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
         android:textColor="@color/black"/>
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edittext_biankuang"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:hint="请输入"
+        android:padding="10dp"
         android:id="@+id/ManagerProblemInformation_reason"
         android:layout_marginBottom="5dp"
         android:textColor="@color/black"/>
     <LinearLayout
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:id="@+id/COMPANY_PHOTO"
+        android:layout_gravity="center">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/take_photo"
+            android:src="@mipmap/image"
+            />
+    </LinearLayout>
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/ManagerProblemInformation_agree"
-            android:layout_gravity="center"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/ManagerProblemInformation_regict"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+        android:text="提交"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="@color/blue"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:id="@+id/Pro_Submit"
+        />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

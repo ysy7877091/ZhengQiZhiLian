@@ -1,4 +1,4 @@
-package Manager;
+package manager;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -42,6 +42,7 @@ import com.esri.core.symbol.PictureMarkerSymbol;
 import com.esri.core.tasks.ags.query.Query;
 import com.myself.wypqwer.zhengqi_zhilian.CommonMethod;
 import com.myself.wypqwer.zhengqi_zhilian.ComputerInformation;
+import com.myself.wypqwer.zhengqi_zhilian.MainXiuGaiPWD;
 import com.myself.wypqwer.zhengqi_zhilian.MapSouSuoActivity;
 import com.myself.wypqwer.zhengqi_zhilian.MyProgressDialog;
 import com.myself.wypqwer.zhengqi_zhilian.Path;
@@ -243,7 +244,8 @@ public class Manager_ZhuYeMapActivity extends AppCompatActivity {
             switch (v.getId()){
                 case R.id.MapMeau:MeauPopWindows();break;
                 case R.id.MapPop_SumProblem:
-                    Intent intent1 = new Intent(Manager_ZhuYeMapActivity.this,ProblemSumActivity.class);
+                    Intent intent1 = new Intent(Manager_ZhuYeMapActivity.this,Manager_ProblemSum.class);
+                    intent1.putExtra("information",getIntent().getSerializableExtra("information"));
                     startActivity(intent1);
                     closePopwindow();
                     break;
@@ -258,7 +260,12 @@ public class Manager_ZhuYeMapActivity extends AppCompatActivity {
                         }
                     }
                     break;
-                case R.id.MapPop_pwd:break;
+                case R.id.MapPop_pwd:
+                                        Intent intent2 = new Intent(Manager_ZhuYeMapActivity.this,MainXiuGaiPWD.class);
+                                        intent2.putExtra("user",getIntent().getStringExtra("alais"));
+                                        intent2.putExtra("pwd",getIntent().getStringExtra("pwd"));
+                                        startActivity(intent2);
+                                        break;
             }
         }
     }

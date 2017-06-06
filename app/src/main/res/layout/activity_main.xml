@@ -6,33 +6,30 @@
     android:orientation="vertical"
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:background="@color/white"
-    android:weightSum="7">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:orientation="vertical"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="1">
+        android:background="@color/z070"
+        android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="登录"
-            android:textColor="#040404"
+            android:textColor="@color/white"
             android:textSize="23sp"
-            android:layout_gravity="center_horizontal"/>
+            />
 
-        <ImageView
-            android:paddingTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/titles"/>
 
     </LinearLayout>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -44,27 +41,40 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/logo_daizi"/>
 
-    </LinearLayout>
+    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+
         android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="手机号码"
+                android:textSize="18sp"
+                android:id="@+id/user_phone"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                />
             <EditText
                 android:textCursorDrawable="@drawable/my_cursor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="45dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:background="@null"
                 android:textColorHint="#cbcbd1"
+                android:layout_toRightOf="@id/user_phone"
+                android:layout_alignTop="@id/user_phone"
                 android:id="@+id/username"
-                android:hint="请输入账号"
+                android:hint="请输入手机号码"
+                android:paddingLeft="20dp"
                 android:layout_centerVertical="true"/>
 
             <TextView
@@ -73,23 +83,34 @@
                 android:background="@color/tj11"
                 android:id="@+id/dengLu_zhangHaoText"
                 android:layout_below="@id/username"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
+                android:layout_alignLeft="@id/user_phone"
+                android:layout_alignRight="@id/username"
                 />
 
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
+            android:layout_height="50dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="输入密码"
+                android:textSize="18sp"
+                android:id="@+id/pwd_phone"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                />
             <EditText
                 android:textCursorDrawable="@drawable/my_cursor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="45dp"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="20dp"
                 android:layout_marginRight="10dp"
                 android:background="@null"
+                android:layout_toRightOf="@id/pwd_phone"
+                android:layout_alignTop="@id/pwd_phone"
                 android:textColorHint="#cbcbd1"
                 android:id="@+id/password"
                 android:hint="请输入密码"
@@ -103,8 +124,8 @@
                 android:background="@color/tj11"
                 android:id="@+id/dengLu_miMaText"
                 android:layout_below="@id/password"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
+                android:layout_alignLeft="@id/pwd_phone"
+                android:layout_alignRight="@id/password"
                 />
         </RelativeLayout>
     </LinearLayout>
@@ -112,9 +133,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="50dp">
 
         <ImageView
             android:layout_width="wrap_content"

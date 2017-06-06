@@ -65,10 +65,10 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="10dp"
-                android:background="@null"
                 android:textColorHint="#cbcbd1"
                 android:id="@+id/ZhuCe_Name"
                 android:hint="请输入姓名"
+                android:textSize="16sp"
                 android:layout_centerVertical="true"/>
 
             <TextView
@@ -95,7 +95,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="10dp"
-                android:background="@null"
+                android:textSize="16sp"
                 android:textColorHint="#cbcbd1"
                 android:id="@+id/ZhuCe_TelePhoneNum"
                 android:hint="请输入手机号"
@@ -122,7 +122,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="10dp"
-                android:background="@null"
+                android:textSize="16sp"
                 android:textColorHint="#cbcbd1"
                 android:id="@+id/ZhuCe_PassWord"
                 android:hint="请输入密码"
@@ -151,7 +151,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="10dp"
-                android:background="@null"
+                android:textSize="16sp"
                 android:textColorHint="#cbcbd1"
                 android:id="@+id/ZhuCe_SurePassWord"
                 android:hint="请再次输入密码"
@@ -180,7 +180,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="10dp"
-                android:background="@null"
+                android:textSize="16sp"
                 android:textColorHint="#cbcbd1"
                 android:id="@+id/ZhuCe_sex"
                 android:hint="请输入性别"
@@ -200,18 +200,21 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:id="@+id/power">
 
-            <EditText
+            <TextView
                 android:textCursorDrawable="@drawable/my_cursor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="10dp"
-                android:background="@null"
                 android:textColorHint="#cbcbd1"
                 android:id="@+id/ZhuCe_Power"
                 android:hint="请输入权限"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
                 android:layout_centerVertical="true"/>
 
             <TextView
@@ -229,18 +232,23 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:visibility="gone">
+            android:visibility="gone"
+            android:id="@+id/ZhuCe_Limit">
 
-            <EditText
+            <TextView
                 android:textCursorDrawable="@drawable/my_cursor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="10dp"
-                android:background="@null"
+                android:gravity="center_vertical"
                 android:textColorHint="#cbcbd1"
                 android:id="@+id/ZhuCe_Power_Type"
-                android:hint=""
+                android:hint="请选择"
+                android:singleLine="true"
+                android:enabled="true"
+                android:textSize="16sp"
+                android:clickable="true"
                 android:layout_centerVertical="true"/>
 
             <TextView

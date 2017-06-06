@@ -5,6 +5,8 @@
         android:orientation="vertical"
         android:clipToPadding="true"
         android:fitsSystemWindows="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         >
         <RelativeLayout
             android:layout_width="match_parent"
@@ -39,14 +41,14 @@
                 android:singleLine="true"
                 android:layout_marginRight="60dp"
                 />
-            <ImageView
+            <!--<ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/mapsousuo"
                 android:layout_marginRight="70dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                />
+                />-->
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"

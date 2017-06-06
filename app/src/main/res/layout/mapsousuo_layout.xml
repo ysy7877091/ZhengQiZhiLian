@@ -25,7 +25,7 @@
             android:padding="15dp"
             android:singleLine="true"
             />
-        <ImageView
+       <!-- <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/mapsousuo"
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="#00000000"
-            android:id="@+id/SouSuoButton"/>
+            android:id="@+id/SouSuoButton"/>-->
     </RelativeLayout>
     <ListView
         android:layout_width="match_parent"

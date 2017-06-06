@@ -32,7 +32,7 @@
         android:theme="@style/AppTheme"
         android:name=".ExampleApplication">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".GuangGaoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,12 +47,13 @@
         <activity android:name=".ProblemSumActivity"></activity>
         <activity android:name=".ProblemInformation"></activity>
         <activity android:name=".MainXiuGaiPWD"></activity>
-        <!--<activity android:name="Company.CompanyComblem"></activity>
-        <activity android:name="Company.CompanyComblemInformation"></activity>
-        <activity android:name="Company.ProblemInformation"></activity>
-        <activity android:name="Manager.Manager_ZhuYeMapActivity"></activity>
-        <activity android:name="Manager.Manager_ProblemSum"></activity>
-        <activity android:name="Manager.XiuGaiPwd"></activity>-->
+        <activity android:name="company.CompanyComblem"></activity>
+        <activity android:name="company.ProblemInformation"></activity>
+        <activity android:name="manager.Manager_ProblemSum"></activity>
+        <activity android:name="manager.Manager_ZhuYeMapActivity"></activity>
+        <activity android:name="manager.XiuGaiPwd"></activity>
+        <activity android:name="company.CompanyComblemInformation"></activity>
+        <activity android:name=".MainActivity"></activity>
         <service
             android:name="cn.jpush.android.service.PushService"
             android:enabled="true"
@@ -138,7 +139,15 @@
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
         <meta-data android:name="JPUSH_APPKEY" android:value="45a387ede2ebd18a445ea5f1"/>
 
-
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.jph.takephoto.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

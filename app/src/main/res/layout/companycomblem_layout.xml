@@ -52,23 +52,23 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:id="@+id/CompanyComblem_AllPerson"
+                android:id="@+id/CompanyComblem_Ju"
                 android:layout_marginLeft="50dp"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="全部责任人"
+                    android:text="责任人"
                     android:textSize="13sp"
                     android:clickable="false"
-                    android:id="@+id/allState"
+                    android:id="@+id/weiTuoJu"
                     android:layout_centerVertical="true"
                     />
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/daosanjiao"
-                    android:layout_toRightOf="@id/allState"
+                    android:layout_toRightOf="@id/weiTuoJu"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
                     android:clickable="false"
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:text="全部状态"
                     android:textSize="13sp"
-                    android:id="@+id/alltime"
+                    android:id="@+id/stateChange"
                     android:layout_centerVertical="true"
 
                     />
@@ -94,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/daosanjiao"
-                    android:layout_toRightOf="@id/alltime"
+                    android:layout_toRightOf="@id/stateChange"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
                     />
@@ -108,7 +108,7 @@
             />
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/CompanyComblem_mListView"/>
 
     </LinearLayout>

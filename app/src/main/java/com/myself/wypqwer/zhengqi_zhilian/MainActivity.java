@@ -1,7 +1,6 @@
 package com.myself.wypqwer.zhengqi_zhilian;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -12,10 +11,8 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,6 +25,13 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import JavaBeen.PublicBeen;
+import company.CompanyComblem;
+import manager.Manager_ZhuYeMapActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     private  EditText ED_Username;
@@ -35,11 +39,12 @@ public class MainActivity extends AppCompatActivity {
     private MyProgressDialog ProgressDialog;
     private TextView dengLu_miMaText;
     private TextView dengLu_zhangHaoText;
+    private List<PublicBeen> list = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        CommonMethod.setStatuColor(MainActivity.this,R.color.white);
+        CommonMethod.setStatuColor(MainActivity.this,R.color.z070);
         init();
 
     }
@@ -103,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     ProgressDialog = new MyProgressDialog(MainActivity.this, false, "登陆中...");
                      new Thread(networkLogin).start();
+                    list.clear();
                     break;
 
                 case R.id.zhuCe:
@@ -149,10 +155,59 @@ public class MainActivity extends AppCompatActivity {
                     msg.what = 0;
                     handlerLogin.sendMessage(msg);
                 }
+                if(envelope.getResponse()!=null) {
+
+                    SoapObject soapProvince = (SoapObject)envelope.bodyIn;
+                    SoapObject soap1 = (SoapObject) soapProvince.getProperty("Get_LoginResult");//获取整个数据
+                    Log.e("warn",soap1.toString());
+                    for(int i=0;i<soap1.getPropertyCount();i++) {//遍历整个数据（此处一个）
+                        PublicBeen pb = new PublicBeen();
+                        //SoapObject soap11= (SoapObject) soap1.getProperty(i);//获取每个子集合
+                        Log.e("warn",soap1.getProperty("State").toString());//获取子集合内属性的值
+                        pb.setLogin_State(soap1.getProperty("State").toString());
+                        if(soap1.toString().contains("loginUserList")) {
+                            SoapObject soap2 = (SoapObject) soap1.getProperty("loginUserList");//获取子集合中的子集合
+                            for (int j = 0; j < soap2.getPropertyCount(); j++) {//
+                                SoapObject soap22 = (SoapObject) soap2.getProperty(j);//获取子集合中的子集合
+                                Log.e("warn", soap22.toString());
+                                pb.setLogin_ID(soap22.getProperty("ID").toString());
+                                Log.e("warn", soap22.getProperty("ID").toString());
+                                pb.setLogin_Name(soap22.getProperty("Name").toString());
+                                Log.e("warn", soap22.getProperty("Name").toString());
+                                pb.setLogin_Power(soap22.getProperty("Power").toString());
+                                Log.e("warn", soap22.getProperty("Power").toString());
+                                pb.setLogin_Tel(soap22.getProperty("Tel").toString());
+                                pb.setLogin_Tel(soap22.getProperty("Sex").toString());
+                                if (soap22.toString().contains("GuanlijuList")) {
+                                    SoapObject soap3 = (SoapObject) soap22.getProperty("GuanlijuList");//获取子集合中的子集合整个数据
+
+                                    for (int k = 0; k < soap3.getPropertyCount(); k++) {
+                                        SoapObject soap33 = (SoapObject) soap3.getProperty(k);//获取子集合中的子集合
+                                        pb.setManager_id(soap33.getProperty("ID").toString());
+                                        Log.e("warn", soap33.getProperty("GLJNAME").toString());
+                                        pb.setManager_name(soap33.getProperty("GLJNAME").toString());
+                                    }
+                                }
+                                if (soap22.toString().contains("BriefList")) {
+                                    SoapObject soap4 = (SoapObject) soap22.getProperty("BriefList");//获取子集合中的子集合整个数据
+
+                                    for (int k = 0; k < soap4.getPropertyCount(); k++) {
+                                        SoapObject soap44 = (SoapObject) soap4.getProperty(k);//获取子集合中的子集合
+                                        pb.setLogin_proID(soap44.getProperty("ID").toString());
+                                        Log.e("warn", soap44.getProperty("PRONAME").toString());
+                                        pb.setLogin_proName(soap44.getProperty("PRONAME").toString());
+                                    }
+                                }
+                            }
+                        }
+                        list.add(pb);
+                    }
+
                     Message msg = Message.obtain();
                     msg.what = 1;
                     msg.obj = object.toString();
                     handlerLogin.sendMessage(msg);
+                }
             } catch (Exception e) {
                 Message msg = Message.obtain();
                 msg.what = 0;
@@ -176,35 +231,56 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"无数据",Toast.LENGTH_SHORT).show();
 
             } else if (i == 1) {
+                Log.e("warn",list.get(0).getLogin_State()+".........");
                 ProgressDialog.dismiss();
-                String str = (String) msg.obj;
-                Log.e("warn", str);
-
-                if (str.contains("State")) {
-                    int index = str.indexOf("State");
-                    Log.e("warn", String.valueOf(index));
-                    String result = str.substring(index + 1);
-                    Log.e("warn",result);
-                    int index1 = result.indexOf("=");
-                    Log.e("warn", String.valueOf(index1));
-                    int index2 = result.indexOf(";");
-                    Log.e("warn", String.valueOf(index2));
-                    String result1 = result.substring(index1 + 1, index2);
-                    Log.e("warn", result1);
-                    if (result1.equals("0")) {
-                        SharedPreferences sp = getSharedPreferences("logininformation",0);
-                        SharedPreferences.Editor edit=sp.edit();
-                        edit.putString("use",ED_Username.getText().toString().trim());
-                        edit.putString("pwd",ED_Paqssword.getText().toString().trim());
+                if(list.size()>0) {
+                    if (list.get(0).getLogin_State().equals("0")) {
+                        SharedPreferences sp = getSharedPreferences("logininformation", 0);
+                        SharedPreferences.Editor edit = sp.edit();
+                        edit.putString("use", ED_Username.getText().toString().trim());
+                        edit.putString("pwd", ED_Paqssword.getText().toString().trim());
                         edit.commit();
-                        Toast.makeText(MainActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this, ShouYeMapActivity.class);
-                        intent.putExtra("alais",ED_Username.getText().toString().trim());
-                        startActivity(intent);
-                        finish();
-                    } else if (result1.equals("2")) {
+                        String power =list.get(0).getLogin_Power();
+                        if (power.equals("")) {
+                            Toast.makeText(MainActivity.this, "未获取到有效权限，无法登陆", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        if (power.equals("0")) {
+                            Toast.makeText(MainActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MainActivity.this, ShouYeMapActivity.class);
+                            intent.putExtra("alais", ED_Username.getText().toString().trim());
+                            intent.putExtra("pwd",ED_Paqssword.getText().toString());
+                            intent.putExtra("information", list.get(0));
+                            startActivity(intent);
+                            finish();
+                        } else if (power.equals("1")) {
+                            Toast.makeText(MainActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MainActivity.this, Manager_ZhuYeMapActivity.class);
+                            intent.putExtra("alais", ED_Username.getText().toString().trim());
+                            intent.putExtra("pwd",ED_Paqssword.getText().toString());
+                            intent.putExtra("information", list.get(0));
+                            startActivity(intent);
+                            finish();
+                        } else if (power.equals("2")) {
+                            Intent intent = new Intent(MainActivity.this, CompanyComblem.class);
+                            intent.putExtra("alais", ED_Username.getText().toString().trim());
+                            intent.putExtra("pwd",ED_Paqssword.getText().toString());
+                            intent.putExtra("information",list.get(0));
+                            startActivity(intent);
+                            finish();
+                            Toast.makeText(MainActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(MainActivity.this, "权限无效,无法登陆", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    } else if (list.get(0).getLogin_State().equals("2")) {
                         Toast.makeText(MainActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
+                    } else if (list.get(0).getLogin_State().equals("3")) {
+                        Toast.makeText(MainActivity.this, "系统异常,联系管理员", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
                     }
+
                 } else {
                     Toast.makeText(MainActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
                 }
@@ -213,9 +289,10 @@ public class MainActivity extends AppCompatActivity {
     };
     //读写sd卡权限
     private static String[] PERMISSIONS_STORAGE = {
-            android.Manifest.permission.READ_EXTERNAL_STORAGE,
-            android.Manifest.permission.WRITE_EXTERNAL_STORAGE ,
-            Manifest.permission.READ_PHONE_STATE};
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE ,
+            Manifest.permission.READ_PHONE_STATE,
+            };
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     //检查sd卡和读取手机emei申请权限
@@ -258,6 +335,18 @@ public class MainActivity extends AppCompatActivity {
             ED_Paqssword.setText(pwd);
         }
     }
-
+    private String Limit(String str){
+        Log.e("warn",str);
+         if(str.contains("Power")){
+             int index_power = str.indexOf("Power");
+             String result  = str.substring(index_power);
+             int index_d = result.indexOf("=");
+             int index_f = result.indexOf(";");
+             String result_power=result.substring(index_d+1,index_f);
+             Log.e("warn",result_power);
+             return result_power;
+         }
+        return "";
+    }
 
 }

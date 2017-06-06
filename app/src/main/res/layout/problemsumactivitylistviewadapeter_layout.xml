@@ -6,13 +6,23 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <!--<com.android.volley.toolbox.NetworkImageView
+            android:layout_marginLeft="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/problem_photo"
+            android:scaleType="fitXY"/>-->
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:id="@+id/ProblemSum_COMPANY"
             android:text="公司"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
+            android:singleLine="true"
+            android:enabled="true"
             android:textColor="@color/black"/>
         <TextView
             android:layout_width="wrap_content"
