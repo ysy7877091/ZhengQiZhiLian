@@ -65,7 +65,7 @@ public class ZhuCe extends AppCompatActivity implements View.OnClickListener , P
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zhu_ce);
-        CommonMethod.setStatuColor(ZhuCe.this,R.color.white);
+        CommonMethod.setStatuColor(ZhuCe.this,R.color.z070);
 
         iv_back = (Button) findViewById(R.id.iv_back);
         iv_back.setOnClickListener(this);

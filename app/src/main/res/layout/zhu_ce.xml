@@ -7,20 +7,21 @@
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
     android:background="@color/white"
-    android:weightSum="13">
+    android:weightSum="10">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
        android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/z070">
 
 
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/icon_back"
+                android:src="@mipmap/allback"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"/>
             <Button
@@ -34,12 +35,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="注册"
-                android:textColor="#040404"
+                android:textColor="@color/white"
                 android:textSize="23sp"
                 />
     </RelativeLayout>
 
-    <LinearLayout
+   <!-- <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2"
@@ -51,25 +52,37 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/logo_daizi"/>
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1">
-
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="企业全称"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:id="@+id/zhecu_company"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                />
             <EditText
                 android:textCursorDrawable="@drawable/my_cursor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="45dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/zhecu_company"
+                android:layout_alignTop="@id/zhecu_company"
                 android:layout_marginRight="10dp"
                 android:textColorHint="#cbcbd1"
                 android:id="@+id/ZhuCe_Name"
-                android:hint="请输入姓名"
+                android:hint="请输入企业全称"
                 android:textSize="16sp"
-                android:layout_centerVertical="true"/>
+                />
 
             <TextView
                 android:layout_width="match_parent"
@@ -77,8 +90,8 @@
                 android:background="@color/tj11"
                 android:id="@+id/ZhuCe_NameText"
                 android:layout_below="@id/ZhuCe_Name"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
+                android:layout_alignLeft="@id/zhecu_company"
+                android:layout_alignRight="@id/ZhuCe_Name"
                 />
 
         </RelativeLayout>
@@ -87,20 +100,30 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1">
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="手机号码"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:id="@+id/zhecu_phone"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                />
             <EditText
                 android:inputType="number"
                 android:textCursorDrawable="@drawable/my_cursor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="45dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:textSize="16sp"
                 android:textColorHint="#cbcbd1"
                 android:id="@+id/ZhuCe_TelePhoneNum"
                 android:hint="请输入手机号"
-
-                android:layout_centerVertical="true"/>
+                android:layout_toRightOf="@id/zhecu_phone"
+                android:layout_alignTop="@id/zhecu_phone"
+                />
 
             <TextView
                 android:layout_width="match_parent"
@@ -108,25 +131,37 @@
                 android:background="@color/tj11"
                 android:id="@+id/ZhuCe_TelePhoneNumText"
                 android:layout_below="@id/ZhuCe_TelePhoneNum"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
+                android:layout_alignRight="@id/ZhuCe_TelePhoneNum"
+                android:layout_alignLeft="@id/zhecu_phone"
                 />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="输入密码"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:id="@+id/zhecu_pwd"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                />
             <EditText
                 android:textCursorDrawable="@drawable/my_cursor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="45dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:textSize="16sp"
                 android:textColorHint="#cbcbd1"
                 android:id="@+id/ZhuCe_PassWord"
                 android:hint="请输入密码"
                 android:password="true"
+                android:layout_toRightOf="@id/zhecu_pwd"
+                android:layout_alignTop="@id/zhecu_pwd"
                 android:layout_centerVertical="true"/>
 
             <TextView
@@ -135,8 +170,8 @@
                 android:background="@color/tj11"
                 android:id="@+id/ZhuCe_PassWordText"
                 android:layout_below="@id/ZhuCe_PassWord"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
+                android:layout_alignLeft="@id/zhecu_pwd"
+                android:layout_alignRight="@id/ZhuCe_PassWord"
                 />
 
         </RelativeLayout>
@@ -144,19 +179,30 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1">
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="确认密码"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:id="@+id/zhecu_surepwd"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                />
             <EditText
                 android:textCursorDrawable="@drawable/my_cursor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="45dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:textSize="16sp"
                 android:textColorHint="#cbcbd1"
                 android:id="@+id/ZhuCe_SurePassWord"
                 android:hint="请再次输入密码"
                 android:password="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/zhecu_surepwd"
+                android:layout_alignTop="@id/zhecu_surepwd"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -164,8 +210,8 @@
                 android:background="@color/tj11"
                 android:id="@+id/ZhuCe_SurePassWordText"
                 android:layout_below="@id/ZhuCe_SurePassWord"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
+                android:layout_alignLeft="@id/zhecu_surepwd"
+                android:layout_alignRight="@id/ZhuCe_SurePassWord"
                 />
 
         </RelativeLayout>
@@ -292,7 +338,7 @@
             android:textColor="#4169E1"
             />-->
         <ImageView
-            android:src="@mipmap/zhuce"
+            android:src="@mipmap/zhucebutton"
             android:id="@+id/register_Submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
